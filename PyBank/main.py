@@ -19,28 +19,68 @@ with open(csvpath, 'r') as csvfile:
 
     #read data from first line after header in CSV file
     row = next(csvreader)
-    months_total = 0
-    net_total = float(row[1])
+    months_total = 1
+    net_total = int(row[1])
     total = float(row[1])
+    current_value = row[1]
+    final_profit = int(row[1])
+    initial_profit = int(row[1])
+    monthly_changes = []
+    total_change = 0
+    avg_change = 0
+    date_list = []
+
 
     
     # Read each row of data after the header 
     for row in csvreader:
         # print(row)
 
-    # calculate the total number of months in the dataset
+        # calculate the total number of months in the dataset
         months_total = months_total + 1
     
-    #calculate net total amount of "profit/losses" over the entire period
-    # net_total is the final value
-    # total is the profit/loss of each row
+         #calculate net total amount of "profit/losses" over the entire period
+        # net_total is the final value
+        # total is the profit/loss of each row
         total = float(row[1])
-        net_total = net_total + total
-        
+        net_total = round((net_total + total))
+    
+        #calculate average change.
+        #create a list of profit/loss changes month to month
+        final_profit = int(row[1])
 
-    
-    
-    
-    #print statement to dispay result
-    print(months_total)
-    print(f"{net_total}")
+        if months_total == 1:
+            initial_profit = int(row[1])
+
+        else:
+            monthly_changes_profit = final_profit - initial_profit
+            monthly_changes.append(monthly_changes_profit)
+            # print(f"{final_profit} , {initial_profit}")
+            initial_profit = final_profit 
+
+        # print([monthly_changes])       
+          
+        total_change = total_change + monthly_changes_profit
+        initial_profit = final_profit
+        avg_change = round((total_change / (months_total-1)),2)
+
+        greatest_profit = round(max(monthly_changes))
+        greatest_loss = round(min(monthly_changes))
+
+        #create list of dates
+        date_list.append(str(row[0]))
+      
+        #find index of greatest profit/loss values
+        greatest_profit_month = monthly_changes.index(greatest_profit)
+        greatest_loss_month = monthly_changes.index(greatest_loss)
+
+ #print statement to dispay result
+print(f"Financial Analysis")
+print("---------------------------------")
+print(f"Total Months: {months_total}")
+print(f"Total: ${net_total}")
+print(f"Average Change: ${avg_change}")
+print(f"Greatest Increase in Profits: {date_list[greatest_profit_month]}  (${greatest_profit})")
+print(f"Greatest Decrease in Profits: {date_list[greatest_loss_month]}  (${greatest_loss})")
+
+#Write to CSV File
