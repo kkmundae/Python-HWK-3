@@ -83,4 +83,24 @@ print(f"Average Change: ${avg_change}")
 print(f"Greatest Increase in Profits: {date_list[greatest_profit_month]}  (${greatest_profit})")
 print(f"Greatest Decrease in Profits: {date_list[greatest_loss_month]}  (${greatest_loss})")
 
-#Write to CSV File
+#Convert all to strings before writing
+a = "Total Months: " + str(months_total) + "\n"
+b = "Total: $" + str(net_total) + "\n"
+c = "Average Change: $" + str(avg_change) + "\n"
+d = "Greatest Increase in Profits: " + str(date_list[greatest_profit_month]) + " " + "($" + str(greatest_profit) + ")\n"
+f = "Greatest Decrease in Profits: " + str(date_list[greatest_loss_month]) + " " + "($" + str(greatest_loss) + ")"
+
+
+#Write to TXT File to be located in Analysis Folder
+
+# Specify the file to write to
+output_path = os.path.join('Analysis','output_pybank.txt')
+with open(output_path , 'w') as f:
+
+    f.write("Financial Analysis \n")
+    f.write("---------------------------------\n")
+    f.write(a)
+    f.write(b)
+    f.write(c)
+    f.write(d)
+    f.write(f)
