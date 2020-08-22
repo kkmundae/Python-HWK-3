@@ -12,7 +12,6 @@ with open(csvpath, 'r') as csvfile:
 
     #print(csvreader)
 
-    # Read the header row first (skip this step if there is no header)
     # this will skip header
     csv_header = next(csvreader)
 
@@ -48,49 +47,21 @@ with open(csvpath, 'r') as csvfile:
 
         if vote_count > winning_votes:
             winning_votes = vote_count
-            winner = name
-
-        # #iterate through dictionary to make a list of values ()
-        # # vote_count.append((key,value))
-        # # candidate_votes((key,vote_count))
-        # percent = '{0:.0%}'.format(float(vote_count) / float(total_votes))
-        # ##check rounding docs
-        # vote_percentage.append((name,percent))
-
-        # if vote_count > winning_votes:
-        #     winning_votes = vote_count
-        #     winner = name
-    
-    # candidate_votes = vote_percentage.append((key,percent))
-
-        #iterate through dictionary using the values (vote count) to calculate percentages
-  
-    #iterate through dictionary using the values (vote count) to calculate percentages
-    # for key,value in candidates.items():
-    #     percent = round((float(value) / float(total_votes)) * 100,3)
-    #     ##check rounding docs
-    #     vote_percentage.append((key,percent))
-    
+            winner = name    
    
-
+# Print to Terminal
 print("Election Test Results")
 print("----------------------------")
 print(f"Total votes: {total_votes}")
 print("----------------------------")
 for name, vote_count in candidates.items():
     print(f"{name}: {vote_percentage[name]} ({vote_count})")
-
-# # print(f"")
-# print(candidates)
-# # print(vote_count)
-# print(vote_percentage)
-
-#{vote_percentage[name]}
 print("----------------------------")
 print(f"Winner: {winner}")
 print("----------------------------")
 
-# Specify the file to write to
+# Print to Txt File
+#  Specify the file to write to
 output_path = os.path.join('Analysis','output_pypoll.txt')
 with open(output_path , 'w') as f:
     f.write("Election Test Results" + "\n")
