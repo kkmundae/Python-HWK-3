@@ -65,7 +65,9 @@ print("----------------------------")
 output_path = os.path.join('Analysis','output_pypoll.txt')
 with open(output_path , 'w') as f:
     f.write("Election Test Results" + "\n")
-    f.write("---------------------------------\n")
+    f.write("----------------------------\n")
+    f.write(f"Total votes: {total_votes}" + "\n")
+    f.write("----------------------------\n")
     for name, vote_count in candidates.items():
         f.write(f"{name}: {vote_percentage[name]} ({vote_count})" + "\n")
     f.write("----------------------------"+ "\n")
